@@ -9,12 +9,16 @@ function App() {
   const [datum, setDatum] = useState(
     new Date().toLocaleDateString("en-UK").replace(/\//g, "-")
   );
+  const [totaal, setTotaal] = useState("");
 
-  console.log(naam, bankrek, datum);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(naam, bankrek, datum, totaal);
+  };
 
   return (
     <div className="app">
-      <form>
+      <form onSubmit={handleSubmit}>
         <FormInput
           placeholder="Datum"
           setInput={setDatum}
@@ -23,7 +27,8 @@ function App() {
         />
         <FormInput placeholder="Naam" setInput={setNaam} />
         <FormInput placeholder="Bankrekeningnummer" setInput={setBankrek} />
-        <FormInput placeholder="Totaal bedrag" />
+        <FormInput placeholder="Totaal bedrag" setInput={setTotaal} />
+        <button>Ok</button>
       </form>
     </div>
   );
