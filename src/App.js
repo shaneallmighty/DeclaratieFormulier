@@ -10,23 +10,42 @@ function App() {
     new Date().toLocaleDateString("en-UK").replace(/\//g, "-")
   );
   const [totaal, setTotaal] = useState("");
+  const [data, setData] = useState([]);
+
+  const downloadData = [{ datum, naam, bankrek, totaal }];
 
   console.log(naam, bankrek, datum, totaal);
 
-  const [data, setData] = useState([]);
-
-  const downloadData = "string";
-
+  //Knop voor data handling
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Ensure all fields are filled
+    if (!datum || !naam || !bankrek || !totaal) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     const currentData = { datum, naam, bankrek, totaal };
-    setData([currentData]);
+
+    // Append the current entry to the existing data
+    setData((prevData) => [...prevData, currentData]);
     console.log(currentData);
+
+    //clear input fields
     setDatum("");
     setNaam("");
     setBankrek("");
     setTotaal("");
   };
+
+  // Define headers for the CSV
+  const headers = [
+    { label: "Datum", key: "datum" },
+    { label: "Naam", key: "naam" },
+    { label: "Bankrekeningnummer", key: "bankrek" },
+    { label: "Totaal bedrag", key: "totaal" },
+  ];
 
   return (
     <div className="app">
@@ -52,7 +71,13 @@ function App() {
         />
         <button>Ok</button>
 
-        <CSVLink data={downloadData} enclosingCharacter={`'`}>
+        <CSVLink
+          data={downloadData}
+          headers={headers}
+          enclosingCharacter={`'`}
+          filename={`Declaratie_${naam}_${datum}`}
+          target="_blank"
+        >
           Download me
         </CSVLink>
       </form>
