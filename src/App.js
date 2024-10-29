@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "./components/FormInput";
 import "./css/App.css";
-import { computeHeadingLevel } from "@testing-library/react";
+import { CSVLink, CSVDownload } from "react-csv";
 
 function App() {
   const [naam, setNaam] = useState("");
@@ -11,9 +11,21 @@ function App() {
   );
   const [totaal, setTotaal] = useState("");
 
+  console.log(naam, bankrek, datum, totaal);
+
+  const [data, setData] = useState([]);
+
+  const downloadData = "string";
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(naam, bankrek, datum, totaal);
+    const currentData = { datum, naam, bankrek, totaal };
+    setData([currentData]);
+    console.log(currentData);
+    setDatum("");
+    setNaam("");
+    setBankrek("");
+    setTotaal("");
   };
 
   return (
@@ -25,10 +37,24 @@ function App() {
           value={datum}
           type=""
         />
-        <FormInput placeholder="Naam" setInput={setNaam} />
-        <FormInput placeholder="Bankrekeningnummer" setInput={setBankrek} />
-        <FormInput placeholder="Totaal bedrag" setInput={setTotaal} />
+        <FormInput placeholder="Naam" setInput={setNaam} value={naam} type="" />
+        <FormInput
+          placeholder="Bankrekeningnummer"
+          setInput={setBankrek}
+          value={bankrek}
+          type=""
+        />
+        <FormInput
+          placeholder="Totaal bedrag"
+          setInput={setTotaal}
+          value={totaal}
+          type=""
+        />
         <button>Ok</button>
+
+        <CSVLink data={downloadData} enclosingCharacter={`'`}>
+          Download me
+        </CSVLink>
       </form>
     </div>
   );
