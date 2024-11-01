@@ -17,32 +17,26 @@ function App() {
   //Knop voor data handling
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Ensure all fields are filled
     if (!datum || !naam || !bankrek || !totaal) {
       alert("Please fill in all fields.");
       return;
     }
-
     const currentData = { datum, naam, bankrek, totaal };
-
     // Append the current entry to the existing data
     setData((prevData) => [...prevData, currentData]);
     console.log(currentData);
-
-    // //clear input fields
-    // setDatum("");
-    // setNaam("");
-    // setBankrek("");
-    // setTotaal("");
   };
 
-  // Define headers for the CSV
-  const headers = [
-    { label: "Datum", key: "datum" },
-    { label: "Naam", key: "naam" },
-    { label: "Bankrekeningnummer", key: "bankrek" },
-    { label: "Totaal bedrag", key: "totaal" },
+  // Define formatted CSV data with a single header row and blank rows for spacing
+  const formattedData = [
+    ["", "Declaratieformulier"], // Title row
+    ["", "", "", ""], // Blank row for spacing
+    ["Datum", datum],
+    ["Naam", naam],
+    ["Bankrekeningnummer", bankrek],
+    ["Totaalbedrag", totaal],
+    ["", "", "", ""], // Another blank row before data
   ];
 
   return (
@@ -70,9 +64,8 @@ function App() {
         <button>Ok</button>
 
         <CSVLink
-          data={data}
-          headers={headers}
-          enclosingCharacter={`'`}
+          data={formattedData}
+          separator=";"
           filename={`Declaratie_${naam}_${datum}`}
         >
           Download me
