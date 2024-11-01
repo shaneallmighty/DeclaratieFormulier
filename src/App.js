@@ -12,9 +12,7 @@ function App() {
   const [totaal, setTotaal] = useState("");
   const [data, setData] = useState([]);
 
-  const downloadData = [{ datum, naam, bankrek, totaal }];
-
-  console.log(naam, bankrek, datum, totaal);
+  // const downloadData = [{ datum, naam, bankrek, totaal }];
 
   //Knop voor data handling
   const handleSubmit = (e) => {
@@ -32,11 +30,11 @@ function App() {
     setData((prevData) => [...prevData, currentData]);
     console.log(currentData);
 
-    //clear input fields
-    setDatum("");
-    setNaam("");
-    setBankrek("");
-    setTotaal("");
+    // //clear input fields
+    // setDatum("");
+    // setNaam("");
+    // setBankrek("");
+    // setTotaal("");
   };
 
   // Define headers for the CSV
@@ -72,11 +70,10 @@ function App() {
         <button>Ok</button>
 
         <CSVLink
-          data={downloadData}
+          data={data}
           headers={headers}
           enclosingCharacter={`'`}
           filename={`Declaratie_${naam}_${datum}`}
-          target="_blank"
         >
           Download me
         </CSVLink>
