@@ -38,7 +38,10 @@ function App() {
     ["Naam", naam],
     ["Bankrekeningnummer", bankrek],
     ["Totaalbedrag", totaal],
-    ["", "", "", ""], // Another blank row before data
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["", "", "", ""],
+    ["Naam organisatie", "Datum bon", "Bedrag inclusief BTW"],
   ];
 
   return (
