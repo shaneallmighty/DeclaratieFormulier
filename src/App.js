@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "./components/FormInput";
 import "./css/App.css";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 function App() {
   const [naam, setNaam] = useState("");
@@ -11,6 +11,7 @@ function App() {
   );
   const [totaal, setTotaal] = useState("");
   const [data, setData] = useState([]);
+  const [showCheck, setShowCheck] = useState(false);
 
   // const downloadData = [{ datum, naam, bankrek, totaal }];
 
@@ -26,6 +27,7 @@ function App() {
     // Append the current entry to the existing data
     setData((prevData) => [...prevData, currentData]);
     console.log(currentData);
+    setShowCheck(true);
   };
 
   // Define formatted CSV data with a single header row and blank rows for spacing
@@ -61,7 +63,18 @@ function App() {
           value={totaal}
           type=""
         />
-        <button>Ok</button>
+
+        <div className="button-image-wrapper">
+          <button>Ok</button>
+
+          {showCheck && (
+            <img
+              src={`${process.env.PUBLIC_URL}/check.png`}
+              alt="check"
+              className="check-image"
+            />
+          )}
+        </div>
 
         <CSVLink
           data={formattedData}

@@ -4,3 +4,14 @@
   justify-content: center;
   height: 100vh;
 }
+
+.button-image-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Optional spacing between button and image */
+}
+
+.check-image {
+  width: auto;
+  height: 100%; /* Makes image height equal to button height */
+}
