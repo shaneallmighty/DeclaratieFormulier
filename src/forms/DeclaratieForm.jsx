@@ -1,6 +1,6 @@
 import FormInput from "../components/FormInput";
 import { useState, useRef } from "react";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink,} from "react-csv";
 
 function DeclaratieForm() {
   const [naam, setNaam] = useState("");
@@ -9,7 +9,6 @@ function DeclaratieForm() {
     new Date().toLocaleDateString("en-UK").replace(/\//g, "-")
   );
   const [totaal, setTotaal] = useState("");
-  const [data, setData] = useState([]);
   const [showCheck, setShowCheck] = useState(false);
 
   // CSVLink reference
@@ -64,7 +63,7 @@ function DeclaratieForm() {
       />
 
       <div>
-      <button class="button-download"
+      <button className="button-download"
       type="button"
       onClick={handleDownload}>
         <svg
