@@ -1,6 +1,7 @@
 import FormInput from "../components/FormInput";
 import { useState, useRef } from "react";
 import { CSVLink,} from "react-csv";
+import "../css/DeclaratieForm.css";
 
 function DeclaratieForm() {
   const [naam, setNaam] = useState("");
@@ -10,6 +11,10 @@ function DeclaratieForm() {
   );
   const [totaal, setTotaal] = useState("");
   const [showCheck, setShowCheck] = useState(false);
+  const [naamOrg, setNaamOrg] = useState("");
+  const [datumBon, setDatumBon] = useState("");
+  const [bedrag, setBedrag] = useState("");
+  const [declarations, setDeclarations] = useState([]);
 
   // CSVLink reference
   const csvLinkRef = useRef(); // Create a ref for CSVLink
@@ -26,6 +31,15 @@ function DeclaratieForm() {
     setShowCheck(true);//Show checkmark
   };
 
+const addDeclaration = (e) => {
+  e.preventDefault();
+  if (!naamOrg || !datumBon || !bedrag) {
+    alert("Please fill in all fields.");
+    return;
+  }
+}
+
+
   // Define formatted CSV data with a single header row and blank rows for spacing
   const formattedData = [
     ["", "Declaratieformulier"], // Title row
@@ -41,7 +55,9 @@ function DeclaratieForm() {
   ];
 
   return (
-    <form onSubmit={handleDownload}>
+    <div className="inner-card">
+    <div className="personalInfo">
+    <form onSubmit={handleDownload} className="form-personal-info">
       <FormInput
         placeholder="Datum"
         setInput={setDatum}
@@ -94,6 +110,31 @@ function DeclaratieForm() {
           style={{ display: "none" }}
         >Download me</CSVLink>
     </form>
+    </div>
+    <div className="declaraties">
+      <form onSubmit={addDeclaration} className = "form-declaratie">
+        <FormInput
+          placeholder="Naam organisatie"
+          setInput={setNaamOrg}
+          value={naamOrg}
+          type=""/>
+        
+        <FormInput
+          placeholder="Datum bon"
+          setInput={setDatumBon}
+          value={datumBon}
+          type="date"/>
+
+        <FormInput
+          placeholder="Bedrag inclusief BTW"
+          setInput={setBedrag}
+          value={bedrag}
+          type="number"/>
+
+        </form>    
+      
+        </div>
+    </div>
   );
 }
 export default DeclaratieForm;
