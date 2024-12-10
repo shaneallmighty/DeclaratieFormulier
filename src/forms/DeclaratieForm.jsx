@@ -62,6 +62,7 @@ function DeclaratieForm() {
     ["", "", "", ""],
     ["", "", "", ""],
     ["", "", "", ""],
+    ["", "", "", ""],
     ["Naam organisatie", "Datum bon", "Bedrag inclusief BTW"],
     ...declarations.map((decl) => [decl.naamOrg, decl.datumBon, decl.bedrag]),
   ];
